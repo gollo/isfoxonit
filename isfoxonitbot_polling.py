@@ -31,8 +31,7 @@ def drinking():
 
 
 def sothirsty():
-    thirsty = ["Dying for a beer", 'Will suck fatz for a pint', "This sun makes me want a beer.",
-               "Anything makes me want a beer.","12% body fat or beer? It's getting harder to choose.","Don't speak to me I'm sober.",'Sparkly water please.',"I am sooo boring without beer","I look so old when I am sober","Need a beer to wash down Fatz's tonsil glaze.","Did I say I'm off the booze?",'Pulling nose hairs.','Sewing buttons on my XXS shirt.','Polishing the chrome pole.',"Updating my status on Facebook cause I'm not drinking don't you know","I've been off it for ${random.randrange(1,50)} days, that must deserve a kiss."]
+    thirsty = ["Dying for a beer", 'Will suck fatz for a pint', "This sun makes me want a beer.","Anything makes me want a beer.","12% body fat or beer? It's getting harder to choose.","Don't speak to me I'm sober.",'Sparkly water please.',"I am sooo boring without beer","I look so old when I am sober","Need a beer to wash down Fatz's tonsil glaze.","Did I say I'm off the booze?",'Pulling nose hairs.','Sewing buttons on my XXS shirt.','Polishing the chrome pole.',"Updating my status on Facebook cause I'm not drinking don't you know","I've been off it for ${random.randrange(1,50)} days, that must deserve a kiss."]
     return thirsty[random.randrange(0, len(thirsty))]
 
 
