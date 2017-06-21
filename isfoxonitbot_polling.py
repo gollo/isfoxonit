@@ -11,9 +11,9 @@ thirsty = ["Dying for a beer", 'Will suck fatz for a pint', "This sun makes me w
            "I look so old when I am sober", "Need a beer to wash down Fatz's tonsil glaze.",
            "Did I say I'm off the booze?", 'Pulling nose hairs.', 'Sewing buttons on my XXS shirt.',
            'Polishing the chrome pole.', "Updating my status on Facebook cause I'm not drinking don't you know",
-           "I've been off it for ${random.randrange(1,50)} days, that must deserve a kiss.",
+           'Been off it for {} days, that must deserve a kiss.'.format(random.randrange(1,50)),
            "Getting boat home, could kill a beer on the boat.",
-           "Trains all delayed by an hour now ffs,Drive a man to drink."]
+           "Trains all delayed by an hour now ffs,Drive a man to drink.","Who needs beer anyway?"]
 drink = ["Pissed as a fart.", "Get to the bar, cnut.", "Call me an Uber I need a sleep outside of my front door.",
          "Look Ma I'm making the most of a terroist incident by getting on telly pissed."]
 
