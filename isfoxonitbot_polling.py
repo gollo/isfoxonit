@@ -4,21 +4,7 @@ from time import sleep
 
 import telepot
 from telepot.loop import MessageLoop
-"""
-today = datetime.today()
-target = datetime(year=2017, month=7, day=5, hour=0, minute=0, second=0)
-remaining = target - today
-print(str(remaining))
-oldtarget = datetime(year=2017, month=5, day=5, hour=0, minute=0, second=0)
-# remaining = oldtarget - today
-remaining = target - target
-if remaining <= timedelta(0):
-    print("Drinkies!!")
-else:
-    print("Not Yet")
 
-print(str(remaining))
-"""
 thirsty = ["Dying for a beer", 'Will suck fatz for a pint', "This sun makes me want a beer.",
            "Anything makes me want a beer.", "12% body fat or beer? It's getting harder to choose.",
            "Don't speak to me I'm sober.", 'Sparkly water please.', "I am sooo boring without beer",
@@ -34,33 +20,33 @@ drink = ["Pissed as a fart.", "Get to the bar, cnut.", "Call me an Uber I need a
 mThirsty = thirsty.copy()
 mDrink = drink.copy()
 
-def returnThirsty(quotes):
-    if len(quotes) == 0:
-        quotes = thirsty.copy()
-    quote = quotes[random.randrange(0, len(quotes))]
-    quotes.remove(quote)
-    return quote, quotes
 
 def usage():
     return (
-    "Send me a message:\n\n*/dyingtoknow@IsFoxOnItBot* - Update on how long for a drink.\n\nTry me a few times, you never know what you'll get!\n")
+        "Send me a message:\n\n*/dyingtoknow@IsFoxOnItBot* - Update on how long for a drink.\n\nTry me a few times, you never know what you'll get!\n")
 
-def drinking():
-    quote, mDrink = returnThirsty(mDrink)
-    return quote
 
 def sothirsty():
-    quote, mThirsty = returnThirsty(mThirsty)
+    global mThirsty, thirsty
+    print(mThirsty)
+    if len(mThirsty) == 0:
+        mThirsty = thirsty.copy()
+    quote = mThirsty[random.randrange(0, len(mThirsty))]
+    mThirsty.remove(quote)
+    print(mThirsty)
     return quote
 
-"""
-print(usage())
-print(drinking())
-print()
-print(sothirsty())
 
-print("Time remaining: " + str(remaining) + "\n" + drinking())
-"""
+def drinking():
+    global mDrink, drink
+    print(mDrink)
+    if len(mDrink) == 0:
+        mDrink = drink.copy()
+    quote = mDrink[random.randrange(0, len(mDrink))]
+    mDrink.remove(quote)
+    print(mDrink)
+    return quote
+
 
 def handle(msg):
     chat_id = msg['chat']['id']
@@ -72,12 +58,9 @@ def handle(msg):
         today = datetime.today()
         target = datetime(year=2017, month=7, day=5, hour=0, minute=0, second=0)
         remaining = target - today
-        # remaining = target - target
         if remaining <= timedelta(0):
-            print("Drinkies!!")
             bot.sendMessage(chat_id, "*Time for drinkies!*\n\n*Foxy's status:*\n_" + drinking() + "_",
                             parse_mode="Markdown")
-            # bot.sendMessage(chat_id, "*testing bold*,_testing italics_", parse_mode="Markdown")
         else:
             bot.sendMessage(chat_id,
                             "*Foxy's status:\n*_" + sothirsty() + "_" + "\n\n" + "*Time remaining:\n*" + "_Fatz Style:_  " + str(
