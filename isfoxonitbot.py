@@ -19,6 +19,7 @@ thirsty = ["Dying for a beer", 'Will suck fatz for a pint', "This sun makes me w
            'Been off it for {} days, that must deserve a kiss.'.format(random.randrange(1, 50)),
            "Getting boat home, could kill a beer on the boat.",
            "This rain is making me thirsty.",
+           "One fucking week to go...",
            "Trains all delayed by an hour now ffs,Drive a man to drink.", "Who needs beer anyway?"]
 drink = ["Pissed as a fart.", "Get to the bar, cnut.", "Call me an Uber I need a sleep outside of my front door.",
          "Look Ma I'm making the most of a terroist incident by getting on telly pissed.",
