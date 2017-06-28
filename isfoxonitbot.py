@@ -72,8 +72,8 @@ def dyintoknow(bot, update):
     logger.warn('dyingtoknow')
     today = datetime.today()
     target = datetime(year=2017, month=7, day=5, hour=0, minute=0, second=0)
-    remaining = target - target
-    #remaining = target - today
+    #remaining = target - target
+    remaining = target - today
     if remaining <= timedelta(0):
         update.message.reply_text("*Time for drinkies!*\n\n*Foxy's status:*\n_" + drinking() + "_",
                                   parse_mode="Markdown")
