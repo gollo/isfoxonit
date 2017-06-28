@@ -20,10 +20,10 @@ thirsty = ["Dying for a beer", 'Will suck fatz for a pint', "This sun makes me w
            "Getting boat home, could kill a beer on the boat.",
            "This rain is making me thirsty.",
            "One fucking week to go...",
+           "New office has a pub, booze free time is not going to last.",
            "Trains all delayed by an hour now ffs,Drive a man to drink.", "Who needs beer anyway?"]
 drink = ["Pissed as a fart.", "Get to the bar, cnut.", "Call me an Uber I need a sleep outside of my front door.",
-         "Look Ma I'm making the most of a terroist incident by getting on telly pissed.",
-         "New office has a pub, booze free time is not going to last."]
+         "Look Ma I'm making the most of a terroist incident by getting on telly pissed."]
 
 mThirsty = thirsty.copy()
 mDrink = drink.copy()
@@ -72,7 +72,8 @@ def dyintoknow(bot, update):
     logger.warn('dyingtoknow')
     today = datetime.today()
     target = datetime(year=2017, month=7, day=5, hour=0, minute=0, second=0)
-    remaining = target - today
+    remaining = target - target
+    #remaining = target - today
     if remaining <= timedelta(0):
         update.message.reply_text("*Time for drinkies!*\n\n*Foxy's status:*\n_" + drinking() + "_",
                                   parse_mode="Markdown")
