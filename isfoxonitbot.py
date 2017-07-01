@@ -27,7 +27,7 @@ drink = ["Pissed as a fart.", "Get to the bar, cnut.", "Call me an Uber I need a
 
 mThirsty = thirsty.copy()
 mDrink = drink.copy()
-
+myState = "thirsty"
 
 def usage():
     return (
@@ -68,13 +68,23 @@ def error(bot, update, error):
     logger.warn('Update "%s" caused error "%s"' % (update, error))
 
 
+def switch(bot,update):
+    global myState
+    if myState == "thirsty":
+        myState = "pissed"
+        update.message.reply_text("Switched from thirsty to "+ myState + ".\n", parse_mode ="Markdown")
+    else:
+        myState = "thirsty"
+        update.message.reply_text("Switched from pissed to " + myState + ".\n", parse_mode = "Markdown")
+
 def dyintoknow(bot, update):
+    global myState
     logger.warn('dyingtoknow')
     today = datetime.today()
     target = datetime(year=2017, month=7, day=5, hour=0, minute=0, second=0)
     #remaining = target - target
     remaining = target - today
-    if remaining <= timedelta(0):
+    if remaining <= timedelta(0) or myState == "pissed":
         update.message.reply_text("*Time for drinkies!*\n\n*Foxy's status:*\n_" + drinking() + "_",
                                   parse_mode="Markdown")
     else:
