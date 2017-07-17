@@ -1,0 +1,33 @@
+#!/bin/bash
+echo "Retrieving NodePorts for isfoxonit app..."
+HTTP_PORT=`kubectl describe service | grep NodePort | grep http |grep -v https| awk '{print $3}' | awk -F "/" '{print $1}'`
+HTTPS_PORT=`kubectl describe service | grep NodePort | grep https| awk '{print $3}' | awk -F "/" '{print $1}'`
+
+# Create the rules if not there - be lazy for now and just delete and recreate
+$(gcloud compute firewall-rules list | grep isfoxonit-http | grep -v https > /dev/null)
+DOES_HTTP_EXIST=$?
+$(gcloud compute firewall-rules list | grep isfoxonit-https > /dev/null)
+DOES_HTTPS_EXIST=$?
+if [ "$DOES_HTTP_EXIST" -eq "1" ]; then
+	HTTP_CMD="gcloud compute firewall-rules create isfoxonit-http --allow=tcp:$HTTP_PORT"
+else
+	HTTP_CMD="gcloud compute firewall-rules update isfoxonit-http --allow=tcp:$HTTP_PORT"
+fi
+if [ "$DOES_HTTPS_EXIST" -eq "1" ]; then
+	HTTPS_CMD="gcloud compute firewall-rules create isfoxonit-https --allow=tcp:$HTTPS_PORT"
+else
+	HTTPS_CMD="gcloud compute firewall-rules update isfoxonit-https --allow=tcp:$HTTPS_PORT"
+fi
+echo "Running $HTTP_CMD..."
+`$HTTP_CMD`
+echo "Running $HTTPS_CMD..."
+`$HTTPS_CMD`
+
+NODE=`kubectl get pods --selector="app=isfoxonit" -o=yaml | grep nodeName | awk -F": " '{print $2}'`
+INSTANCE_IP=`gcloud compute instances list | grep $NODE | awk '{print $5}'`
+echo $NODE
+echo $INSTANCE_IP
+echo "Now curl https://$INSTANCE_IP:$HTTPS_PORT"
+echo "Updating duckdns..."
+echo "https://www.duckdns.org/update?domains=isfoxonit&token=b3e4b636-d0eb-4935-b892-e5d71a17366a&ip=$INSTANCE_IP"
+curl "https://www.duckdns.org/update?domains=isfoxonit&token=b3e4b636-d0eb-4935-b892-e5d71a17366a&ip=$INSTANCE_IP"
