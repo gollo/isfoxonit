@@ -29,6 +29,7 @@ mThirsty = thirsty.copy()
 mDrink = drink.copy()
 myState = "thirsty"
 
+
 def usage():
     return (
         "Send me a message:\n\n*/dyingtoknow@IsFoxOnItBot* - Update on how long for a drink.\n\nTry me a few times, you never know what you'll get!\n")
@@ -68,21 +69,22 @@ def error(bot, update, error):
     logger.warn('Update "%s" caused error "%s"' % (update, error))
 
 
-def switch(bot,update):
+def switch(bot, update):
     global myState
     if myState == "thirsty":
         myState = "pissed"
-        update.message.reply_text("Switched from thirsty to "+ myState + ".\n", parse_mode ="Markdown")
+        update.message.reply_text("Switched from thirsty to " + myState + ".\n", parse_mode="Markdown")
     else:
         myState = "thirsty"
-        update.message.reply_text("Switched from pissed to " + myState + ".\n", parse_mode = "Markdown")
+        update.message.reply_text("Switched from pissed to " + myState + ".\n", parse_mode="Markdown")
+
 
 def dyintoknow(bot, update):
     global myState
-    logger.warn('dyingtoknow')
+    logger.info('dyingtoknow')
     today = datetime.today()
-    target = datetime(year=2017, month=7, day=5, hour=0, minute=0, second=0)
-    #remaining = target - target
+    target = datetime(year=2017, month=7, day=26, hour=17, minute=0, second=0)
+    # remaining = target - target
     remaining = target - today
     if remaining <= timedelta(0) or myState == "pissed":
         update.message.reply_text("*Time for drinkies!*\n\n*Foxy's status:*\n_" + drinking() + "_",
@@ -92,6 +94,10 @@ def dyintoknow(bot, update):
             "*Foxy's status:\n*_" + sothirsty() + "_" + "\n\n" + "*Time remaining:\n*" + "_Fatz Style:_  " + str(
                 remaining), parse_mode="Markdown")
 
+def print_sysinfo(bot,update):
+    import sysinfo
+    logger.info(str("\n" + sysinfo.sysinfo()))
+    update.message.reply_text(sysinfo.sysinfo())
 
 def main():
     TOKEN = "358070225:AAFKiJ7LlmwpVt5MqyYbzcA4tW4TVvOkyew"
@@ -108,6 +114,7 @@ def main():
     dp.add_handler(CommandHandler("help", help))
     dp.add_handler(CommandHandler("dyingtoknow", dyintoknow))
     dp.add_handler(CommandHandler("switch", switch))
+    dp.add_handler(CommandHandler("sysinfo", print_sysinfo))
 
     # on noncommand i.e message - echo the message on Telegram
     dp.add_handler(MessageHandler(Filters.text, help))
@@ -119,7 +126,7 @@ def main():
     updater.start_webhook(listen="0.0.0.0",
                           port=PORT,
                           url_path=TOKEN)
-    updater.bot.set_webhook("https://seangollschewsky.me/" + TOKEN)
+    updater.bot.set_webhook("https://gollo.me/" + TOKEN)
     updater.idle()
 
 

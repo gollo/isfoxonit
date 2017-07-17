@@ -1,0 +1,23 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: isfoxonit
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels: # labels to select/identify the deployment
+        app: isfoxonit
+    spec:     # pod spec                  
+      containers: 
+        - name: isfoxonit
+          image: gollo/isfoxonit:1.2 # image we pushed
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 5000
+        - name: nginx-proxy
+          image: gollo/nginx-proxy:1.2 # image we pushed
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 80
+            - containerPort: 443
