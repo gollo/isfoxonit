@@ -1,0 +1,27 @@
+server {
+	listen 80;
+	listen [::]:80;
+
+	server_name seangollschewsky.me;
+
+	root /var/www/seangollschewsky.me;
+	index index.html;
+
+	location / {
+	try_files $uri $uri/ =404;
+	}
+	location /358070225:AAFKiJ7LlmwpVt5MqyYbzcA4tW4TVvOkyew {
+	proxy_pass http://127.0.0.1:5000;
+	}
+
+    listen 443 ssl; # managed by Certbot
+ssl_certificate /etc/letsencrypt/live/seangollschewsky.me/fullchain.pem; # managed by Certbot
+ssl_certificate_key /etc/letsencrypt/live/seangollschewsky.me/privkey.pem; # managed by Certbot
+    include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot
+
+
+    if ($scheme != "https") {
+        return 301 https://$host$request_uri;
+    } # managed by Certbot
+
+}
