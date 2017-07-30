@@ -27,7 +27,7 @@ NODE=`kubectl get pods --selector="app=isfoxonit" -o=yaml | grep nodeName | awk 
 INSTANCE_IP=`gcloud compute instances list | grep $NODE | awk '{print $5}'`
 echo $NODE
 echo $INSTANCE_IP
-echo "Now curl https://$INSTANCE_IP:$HTTPS_PORT"
+echo "Now curl https://isfoxonit.duckdns.org:$HTTPS_PORT"
 echo "Updating duckdns..."
 echo "https://www.duckdns.org/update?domains=isfoxonit&token=b3e4b636-d0eb-4935-b892-e5d71a17366a&ip=$INSTANCE_IP"
 curl "https://www.duckdns.org/update?domains=isfoxonit&token=b3e4b636-d0eb-4935-b892-e5d71a17366a&ip=$INSTANCE_IP"

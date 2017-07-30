@@ -11,12 +11,12 @@ spec:
     spec:     # pod spec                  
       containers: 
         - name: isfoxonit
-          image: gollo/isfoxonit:1.5 
+          image: %%ISFOXONIT_TAG%%
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 5000
         - name: nginx-proxy
-          image: gollo/nginx-proxy:1.3
+          image: %%NGINX_PROXY_TAG%%
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 80
