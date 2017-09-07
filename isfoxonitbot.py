@@ -23,7 +23,9 @@ thirsty = ["Dying for a beer", 'Will suck fatz for a pint', "This sun makes me w
            "New office has a pub, booze free time is not going to last.",
            "Trains all delayed by an hour now ffs,Drive a man to drink.", "Who needs beer anyway?"]
 drink = ["Pissed as a fart.", "Get to the bar, cnut.", "Call me an Uber I need a sleep outside of my front door.",
-         "Look Da I'm making the most of a terroist incident by getting on telly pissed."]
+         "Look Da I'm making the most of a terroist incident by getting on telly pissed.",
+         "Droney droney droney... tree tree tree!!! Feck!!!",
+         "Ah Guiness. The farts of the gods."]
 
 mThirsty = thirsty.copy()
 mDrink = drink.copy()
