@@ -30,11 +30,17 @@ mThirsty = thirsty.copy()
 mDrink = drink.copy()
 myState = "thirsty"
 
+def gloud_envs():
+    gcloud_envs = ['GAE_INSTANCE','GAE_MEMORY_MB','GAE_VERSION','PORT',
+                   'GCLOUD_PROJECT','GAE_SERVICE']
+    for genv in gcloud_envs:
+        print(genv)
+        if genv in os.environ:
+            print(genv + ": " + os.environ[genv])
 
 def usage():
     return (
         "Send me a message:\n\n*/dyingtoknow@IsFoxOnItBot* - Update on how long for a drink.\n\nTry me a few times, you never know what you'll get!\n")
-
 
 def sothirsty():
     global mThirsty, thirsty
@@ -84,8 +90,7 @@ def dyintoknow(bot, update):
     global myState
     logger.info('dyingtoknow')
     today = datetime.today()
-    target = datetime(year=2017, month=7, day=26, hour=17, minute=0, second=0)
-    # remaining = target - target
+    target = datetime(year=2017, month=10, day=1, hour=17, minute=0, second=0)
     remaining = target - today
     if remaining <= timedelta(0) or myState == "pissed":
         update.message.reply_text("*Time for drinkies!*\n\n*Foxy's status:*\n_" + drinking() + "_",
@@ -102,7 +107,7 @@ def print_sysinfo(bot,update):
 
 def main():
     TOKEN = "358070225:AAFKiJ7LlmwpVt5MqyYbzcA4tW4TVvOkyew"
-    PORT = int(os.environ.get('PORT', '443'))
+    PORT = int(os.environ.get('PORT', '5000'))
 
     # Create the EventHandler and pass it your bot's token.
     updater = Updater(TOKEN)
