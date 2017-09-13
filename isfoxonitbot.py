@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 import logging
 import os
 import random
@@ -103,7 +102,7 @@ def print_sysinfo(bot,update):
 
 def main():
     TOKEN = "358070225:AAFKiJ7LlmwpVt5MqyYbzcA4tW4TVvOkyew"
-    PORT = int(os.environ.get('PORT', '5000'))
+    PORT = int(os.environ.get('PORT', '443'))
 
     # Create the EventHandler and pass it your bot's token.
     updater = Updater(TOKEN)
@@ -128,7 +127,7 @@ def main():
     updater.start_webhook(listen="0.0.0.0",
                           port=PORT,
                           url_path=TOKEN)
-    updater.bot.set_webhook("https://gollo.me/" + TOKEN)
+    updater.bot.set_webhook("https://isfoxonit.appspot.com/" + TOKEN)
     updater.idle()
 
 

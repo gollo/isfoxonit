@@ -1,0 +1,1 @@
+../isfoxonitbot.py
