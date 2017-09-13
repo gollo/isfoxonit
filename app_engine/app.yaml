@@ -1,7 +1,7 @@
-runtime: python36
-api_version: 1
-threadsafe: true
-handlers:
-- url: /.*
-  script: main.app
-  #script: isfoxonit.app
+runtime: python
+env: flex
+entrypoint: python isfoxonit.py
+
+runtime_config:
+  python_version: 3
+
