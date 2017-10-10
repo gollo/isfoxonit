@@ -45,10 +45,11 @@ def gcloud_envs_print():
     """Print GAE env variables."""
     gcloud_envs = ['GAE_INSTANCE', 'GAE_MEMORY_MB', 'GAE_VERSION', 'PORT',
                    'GCLOUD_PROJECT', 'GAE_SERVICE']
+    output = ""
     for genv in gcloud_envs:
-        print(genv)
         if genv in os.environ:
-            print(genv + ": " + os.environ[genv])
+            output = output + genv + ": " + os.environ[genv] + "\n"
+    return output
 
 
 def usage():
@@ -83,25 +84,26 @@ def drinking():
     return quote
 
 
-def start(update):
+def start(bot, update):
     """Get the bot going."""
     update.message.reply_text("*Hi*", parse_mode="Markdown")
 
 
-def help_isfoxonit(update):
+def help_isfoxonit(bot, update):
     """Message for help or not understood."""
     update.message.reply_text("I don't know what you mean you obtuse Manny.\n"
                               + usage(), parse_mode="Markdown")
 
 
-def bot_error(update, error):
+def bot_error(bot, update, error):
     """Log a generic error."""
     #LOGGER.warning('Update "%s" caused error "%s"' % (update, error))
     LOGGER.warning("Update %s caused error %s", update, error)
 
 
-def switch(update):
+def switch(bot, update):
     """Toggle foxy's state."""
+    LOGGER.debug("Switch: %s", update)
     global myState
     if myState == "thirsty":
         myState = "pissed"
@@ -113,7 +115,7 @@ def switch(update):
                                   + myState + ".\n", parse_mode="Markdown")
 
 
-def dyintoknow(update):
+def dyingtoknow(bot, update):
     """Return info on foxy's drinking status."""
     LOGGER.info('dyingtoknow')
     today = datetime.today()
@@ -129,10 +131,10 @@ def dyintoknow(update):
             + str(remaining), parse_mode="Markdown")
 
 
-def print_sysinfo(update):
+def print_sysinfo(bot, update):
     """Print out some sysinfo."""
     import sysinfo
-    LOGGER.info(str("\n" + sysinfo.sysinfo() + "\n" + gcloud_envs_print))
+    LOGGER.info(str("\n" + sysinfo.sysinfo() + "\n" + gcloud_envs_print()))
     update.message.reply_text(sysinfo.sysinfo())
 
 
@@ -149,7 +151,7 @@ def main():
     # on different commands - answer in Telegram
     fox_dispatcher.add_handler(CommandHandler("start", start))
     fox_dispatcher.add_handler(CommandHandler("help", help_isfoxonit))
-    fox_dispatcher.add_handler(CommandHandler("dyingtoknow", dyintoknow))
+    fox_dispatcher.add_handler(CommandHandler("dyingtoknow", dyingtoknow))
     fox_dispatcher.add_handler(CommandHandler("switch", switch))
     fox_dispatcher.add_handler(CommandHandler("sysinfo", print_sysinfo))
 
@@ -163,10 +165,10 @@ def main():
     updater.start_webhook(listen="0.0.0.0",
                           port=port,
                           url_path=TOKEN)
-    updater.bot.set_webhook("https://isfoxonit.duckdns.org" + TOKEN)
+    updater.bot.set_webhook("https://isfoxonit.duckdns.org/" + TOKEN)
     updater.idle()
-#
-#
-# if "__name__" == "__main__":
-#     """Main."""
-#     main()
+
+
+if __name__ == '__main__':
+    """Main."""
+    main()
