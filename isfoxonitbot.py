@@ -163,7 +163,7 @@ def main():
     updater.start_webhook(listen="0.0.0.0",
                           port=port,
                           url_path=TOKEN)
-    updater.bot.set_webhook("https://isfoxonit.appspot.com/" + TOKEN)
+    updater.bot.set_webhook("https://isfoxonit.duckdns.org" + TOKEN)
     updater.idle()
 #
 #
