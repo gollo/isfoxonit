@@ -13,7 +13,7 @@ LOGGER = logging.getLogger(__name__)
 
 TOKEN = "358070225:AAFKiJ7LlmwpVt5MqyYbzcA4tW4TVvOkyew"
 THIRSTY = ["Dying for a beer", 'Will suck fatz for a pint',
-           "This sun makes me want a beer.", "Anything makes me want a beer.","bobobobobobobobobobobobobobobobobobo"
+           "This sun makes me want a beer.", "Anything makes me want a beer.",
            "12% body fat or beer? It's getting harder to choose.",
            "Don't speak to me I'm sober.", "Sparkly water please.",
            "I am sooo boring without beer", "I look so old when I am sober",
