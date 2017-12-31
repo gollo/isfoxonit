@@ -1,0 +1,14 @@
+[Unit]
+Description=isfoxonit Telegram Bot
+Requires=docker.service
+
+[Service]
+ExecStartPre=/bin/sleep 1
+ExecStartPre=/usr/bin/docker pull gollo/isfoxonit:{TAG}
+ExecStart=/usr/bin/docker run --restart=always --name=systemd_isfoxonit -p=5000:5000 gollo/isfoxonit:{TAG}
+ExecStop=/usr/bin/docker stop systemd_isfoxonit
+ExecStopPost=/usr/bin/docker rm -f systemd_isfoxonit
+ExecReload=/usr/bin/docker restart systemd_isfoxonit
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,31 @@
+---
+- hosts: webservers
+  become: yes
+  tasks:
+  - name: Ensure docker
+    apt:
+      name: docker.io
+      state: present
+  - name: ensure docker started and enabled at startup
+    systemd:
+      name: docker
+      state: started
+      enabled: yes
+  - name: Deploy Service
+    template: src=isfoxonit.service dest=/lib/systemd/system/isfoxonit.service
+          owner=root group=root mode=0644
+  - name: Replace version
+    replace:
+      regexp: \{TAG\}
+      replace: '{{ version }}'
+      path: /lib/systemd/system/isfoxonit.service
+    notify:
+    - ensure isfoxonit
+
+  handlers:
+  - name: ensure isfoxonit
+    systemd:
+      name: isfoxonit
+      state: started
+      daemon_reload: yes
+      enabled: yes

@@ -31,6 +31,7 @@ THIRSTY = ["Dying for a beer", 'Will suck fatz for a pint',
            "Who needs beer anyway?"]
 DRINK = ["Pissed as a fart.", "Get to the bar, cnut.",
          "Call me an Uber I need a sleep outside of my front door.",
+         "Uber, uber, on no, Uber is suspended, how is it possible to get home now?",
          "Look Da I'm making the most of a terroist incident by getting on "
          "telly pissed.",
          "Droney droney droney... tree tree tree!!! Feck!!!",

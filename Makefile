@@ -1,5 +1,12 @@
 default: docker_build
 
+deploy:
+	curl -X GET https://seangollschewsky.me/hosts -o hosts
+	ansible-playbook -i hosts playbook.yml --ask-sudo-pass --extra-vars "{ "version": "`cat VERSION`" }"
+
+push:
+	docker push gollo/isfoxonit:`cat VERSION`
+
 docker_build:
 	docker build \
 		--build-arg VCS_REF=`git rev-parse --short HEAD` \
