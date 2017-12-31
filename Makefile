@@ -14,3 +14,4 @@ docker_build:
 		--build-arg VERSION=`cat VERSION` -t gollo/isfoxonit:`cat VERSION` .
 	curl -X POST https://hooks.microbadger.com/images/gollo/isfoxonit/mIPyied0w7E9leHdxeBZO98rsvc=
 
+all: docker_build push deploy

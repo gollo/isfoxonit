@@ -35,6 +35,7 @@ DRINK = ["Pissed as a fart.", "Get to the bar, cnut.",
          "Look Da I'm making the most of a terroist incident by getting on "
          "telly pissed.",
          "Droney droney droney... tree tree tree!!! Feck!!!",
+         "Hey Guarda, you're a bastard and a fat cunt",
          "Ah Guiness. The farts of the gods."]
 
 mThirsty = THIRSTY.copy()
